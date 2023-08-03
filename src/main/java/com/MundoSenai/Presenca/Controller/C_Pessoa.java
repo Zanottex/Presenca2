@@ -6,24 +6,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+
 @Controller
 public class C_Pessoa {
     @GetMapping("/")
-    public String holleWord(){
+    public String holleWord() {
         return "Login/login";
     }
 
     @PostMapping
-    public String postLogin(@RequestParam ("usuario") String usuario, @RequestParam("senha") String senha){
-        if (S_Pessoa.getPessoaLogin(usuario, senha)== null){
+    public String postLogin(@RequestParam("usuario") String usuario, @RequestParam("senha") String senha) {
+        if (S_Pessoa.getPessoaLogin(usuario, senha) == null) {
             return "Login/login";
-        }else{
+        } else {
             return "Home/home";
         }
     }
 
     @GetMapping("/cadastro")
-    public String getCadastro(){
+    public String getCadastro() {
         return "Pessoa/cadastro";
     }
 
@@ -35,7 +37,8 @@ public class C_Pessoa {
                                @RequestParam("dataNasc") String dataNasc,
                                @RequestParam("senha") String senha,
                                @RequestParam("confsenha") String confsenha
-                               ){
+    ) {
+        S_Pessoa.cadastrarPessoa(nome, cpf, email, telefone,dataNasc, senha, confsenha);
         return "redirect:/";
     }
 

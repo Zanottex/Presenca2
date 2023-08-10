@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,6 +8,7 @@
     <title>Conta</title>
 </head>
 <body>
- <h1>logou</h1>
+ <h1>Bem vindo(a): <span th:text="${nome}" style="color: darkblue;"></span>
+ </h1>
 </body>
 </html>

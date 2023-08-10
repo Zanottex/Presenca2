@@ -13,3 +13,4 @@ public interface R_Pessoa extends JpaRepository<M_Pessoa, Long> {
     M_Pessoa findbyUsuarioESenha(@Param("usuario") Long usuario, @Param("senha") String senha);
 }
 
+

@@ -4,6 +4,7 @@ package com.MundoSenai.Presenca.Controller;
 import com.MundoSenai.Presenca.Model.M_Pessoa;
 import com.MundoSenai.Presenca.Model.M_Resposta;
 import com.MundoSenai.Presenca.Service.S_Pessoa;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class C_Pessoa {
         if (session.getAttribute("usuario") == null) {
             return "Login/login";
         } else {
-            redirectAttributes.addFlashAttribute("nome",pessoa.getNome());
+            redirectAttributes.addFlashAttribute("nome", pessoa.getNome());
             return "redirect:/home";
         }
     }

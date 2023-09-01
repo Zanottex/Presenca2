@@ -6,7 +6,7 @@ else{
     return false;
 }
 }
-function validarCPF(cpf) {
+function validatorCPF(cpf) {
   // Remove caracteres não numéricos
   cpf = cpf.replace(/\D/g, '');
 

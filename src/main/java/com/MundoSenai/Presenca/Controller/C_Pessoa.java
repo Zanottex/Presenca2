@@ -20,17 +20,24 @@ public class C_Pessoa {
     }
 
     @PostMapping("/")
-    public String postLogin(@RequestParam("usuario") String usuario,
+    @ResponseBody
+    public M_Resposta postLogin(@RequestParam("usuario") String usuario,
                             @RequestParam("senha") String senha,
                             HttpSession session,
                             RedirectAttributes redirectAttributes) {
         M_Pessoa pessoa = S_Pessoa.getPessoaLogin(usuario, senha);
         session.setAttribute("usuario", pessoa);
         if (session.getAttribute("usuario") == null) {
-            return "Login/login";
+            String mensagem = "VTNC 3";
+            boolean status = false;
+            M_Resposta logou = new M_Resposta( status,mensagem);
+            return logou;
         } else {
             redirectAttributes.addFlashAttribute("nome", pessoa.getNome());
-            return "redirect:/home";
+            String mensagem = "";
+            boolean status = true;
+            M_Resposta logou = new M_Resposta( status,mensagem);
+            return logou;
         }
     }
 
@@ -54,31 +61,18 @@ public class C_Pessoa {
     }
 
     @PostMapping("/cadastro")
-    public RedirectView postCadastro(@RequestParam("Nome") String nome,
+    @ResponseBody
+    public M_Resposta postCadastro(@RequestParam("nome") String nome,
                                      @RequestParam("email") String email,
                                      @RequestParam("cpf") String cpf,
                                      @RequestParam("telefone") String telefone,
-                                     @RequestParam("dataNasc") String dataNasc,
+                                     @RequestParam("data_Nasc") String dataNasc,
                                      @RequestParam("senha") String senha,
-                                     @RequestParam("confsenha") String confsenha,
-                                     RedirectAttributes redirectAttributes
-
-
+                                     @RequestParam("confsenha") String confsenha
     ) {
-        M_Resposta resposta = S_Pessoa.cadastrarPessoa(nome, cpf, email, telefone, dataNasc, senha, confsenha);
-        redirectAttributes.addFlashAttribute("mensagem", resposta.getMensagem());
-        if (resposta.getStatus()) {
-            return new RedirectView("/", true);
-        } else {
-            redirectAttributes.addFlashAttribute("mensagem", resposta.getMensagem());
-            redirectAttributes.addFlashAttribute("nome", nome);
-            redirectAttributes.addFlashAttribute("email", email);
-            redirectAttributes.addFlashAttribute("cpf", cpf);
-            redirectAttributes.addFlashAttribute("telefone", telefone);
-            redirectAttributes.addFlashAttribute("dataNasc", dataNasc);
-            return new RedirectView("/cadastro", true);
-        }
+        return S_Pessoa.cadastrarPessoa(nome, cpf, email, telefone, dataNasc, senha, confsenha);
     }
+
 
 
 }

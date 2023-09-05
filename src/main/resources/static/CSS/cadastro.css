@@ -1,0 +1,16 @@
+/* Adjust the z-index of the toast to make it appear above input fields */
+    .toaster {
+        z-index: 1000; /* You can adjust this value as needed */
+    }
+    .error-field{
+        border: 1px solid red;
+        border-radius: 0.375rem;
+        box-shadow: 0px 0px 5px 0px red;
+    }
+    h1{
+        text-shadow: -1px 1px 1px #aaa;
+    }
+    input:focus{
+        box-shadow: 0px 4px 4px 3px #aaa !important;
+        z-index: -3;
+    }
